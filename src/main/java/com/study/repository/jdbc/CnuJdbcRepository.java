@@ -62,8 +62,19 @@ public class CnuJdbcRepository {
         return jdbcTemplate.queryForObject("SELECT * FROM cnu_post WHERE post_id = ?", cnuPostMapper, postId);
     }
 
+    
+    //어떻게 하나의 트렌젝션으로 묶을까?  => AOP 
+    @Transactional   //이 코드 한줄의 효과 : 이안에서 exception이 생기면 커밋을 안해  
     public int increaseViewCount(CnuPost obj) {
-        return jdbcTemplate.update("UPDATE cnu_post SET view_count = view_count + 1 WHERE post_id = ?", obj.getPostId());
+   	
+    	jdbcTemplate.update("UPDATE cnu_post SET view_count = view_count + 1 WHERE post_id = ?", obj.getPostId());
+    	if(true){
+    		//IDE가 너무 똑똑해서 
+    		throw new RuntimeException();
+    	}
+    	return 0 ;
     }
-
+//@retry(value = 3) 네트워크는 신뢰할 수 없어 그 때마다 error를 뿝는게 아니라 한번 해보고   --> 왜 만들었나?
+//애러가 났을 때 ? 
+    
 }

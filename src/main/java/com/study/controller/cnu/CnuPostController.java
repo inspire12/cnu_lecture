@@ -2,7 +2,7 @@ package com.study.controller.cnu;
 
 import com.study.domain.cnu.CnuComment;
 import com.study.domain.cnu.CnuPost;
-import com.study.domain.cnu.CnuPostComment;
+import com.study.domain.cnu.CnuComment;
 import com.study.repository.jdbc.CnuJdbcRepository;
 import com.study.repository.mybatis.CnuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,6 +66,9 @@ public class CnuPostController {
     	{
     		return "redirect:/post";
     	}
+    	
+    	cnuPost.setContent(cnuPost.getContent().replaceAll("\n\r", "<br>"));
+    	
         cnuPost.increaseViewCount();
 		model.addAttribute("cnuPost", cnuPost); 
 
@@ -78,7 +82,7 @@ public class CnuPostController {
 
     @RequestMapping(value = "/view", method = RequestMethod.POST)
     public String doWriteComment(int postId,String nick_name,String password,String comment) {
-    	CnuPostComment PostComment = new CnuPostComment();
+    	CnuComment PostComment = new CnuComment();
     	PostComment.setPostId(postId);
     	PostComment.setAuthor(nick_name);
     	PostComment.setPassword(password);
@@ -116,12 +120,19 @@ public class CnuPostController {
 
     @RequestMapping( value = "/deleteComment", method = RequestMethod.POST)
     public String deleteComment(int postId, int commentID, String password){
-		CnuPostComment cnuPostComment = new CnuPostComment();
+		CnuComment cnuPostComment = new CnuComment();
 		cnuPostComment.setCommentId(commentID);
 		cnuPostComment.setPassword(password);
 
 		cnuRepository.deleteCnuPostComment(cnuPostComment);
     	return "redirect:/post/view?postId=" + postId;
     }
-
-}
+    @ExceptionHandler (RuntimeException.class)
+    public String handler(RuntimeException e){
+    	System.out.println("===================");
+    	System.out.println("===================");
+    	System.out.println("===================");
+    	return "/post/index";
+    }
+    
+}	
