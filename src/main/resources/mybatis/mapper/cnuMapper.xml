@@ -34,9 +34,28 @@
 		INSERT INTO cnu_post
 			(author, password, title, content, create_time)
 		VALUES
-			(#{author}, #{password}, #{content}, #{title}, NOW())
+			(#{author}, #{password}, #{title}, #{content}, NOW())
 		<selectKey resultType="int" keyProperty="postId" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
+	
+	<select id = "checkCnuPw"  >
+		SELECT 
+			password 
+		FROM w
+q			cnu_post_comment 
+		WHERE 
+			comment = #{commentId}; 
+			
+	</select>
+	
+	<update id = "deleteCnuComment" >
+		UPDATE 
+			CNU_POST_COMMENT 
+		SET 
+			IS_DEL='1' 
+		WHERE 
+			POST_ID = #{postId} AND COMMENT_ID= #{commentId};
+	</update>
 </mapper>

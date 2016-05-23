@@ -9,6 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Insert title here</title>
 	<link rel="stylesheet" href="/css/main.css"/>
+    
 </head>
 <body>
 
@@ -66,23 +67,35 @@
 					<div>
 						<div class="xe_content">덧글이 이게 뭐냐</div>
 					</div>
-
+                    <div style="padding-top: 25px;">
+			<a href="#" onclick="submit()" class="btn btn-primary right">삭제</a>
+		</div>
 					<div class="fdb_nav img_tx">
 					</div>
 				</li>
+                
 				<li class="fdb_itm clear">
 					<div class="meta">
 						<b>Robin</b><span class="date">2016-05-16 11:00:00</span>
 					</div>
 
 					<div>
-						<div class="xe_content">덧글이 이게 뭐냐</div>
+						<div class="xe_content">덧 이게 뭐냐</div>
 					</div>
-
+                <div style="padding-top: 25px;">
+			     <a href="#" onclick="submit()" class="btn btn-primary right">삭제</a>
+		          </div>
+                    
 					<div class="fdb_nav img_tx">
 					</div>
 				</li>
 			</ul>
+            <script>
+                function submit(){
+                        document.getElementById("writeForm").submit();
+		              return false;
+                }
+            </script>
 
 
 			<div class="cmt_editor" style="margin-bottom:10px;">
@@ -98,13 +111,14 @@
 					<div class="edit_opt clear" style="padding-top: 10px;">
 						<span class="itx_wrp">
 							<label for="nick_name_2756295">글쓴이</label>
-							<input type="text" name="nick_name" id="nick_name_2756295" value="" class="itx n_p">
+							<input type="text" name="nick_name" id="nick_name_2756295" value="1" class="itx n_p">
 						</span>
-						<span class="itx_wrp">
+						<span class="itx_rp">
 							<label for="password_2756295">비밀번호</label>
 							<input type="password" name="password" id="password_2756295" class="itx n_p">
 						</span>
 						<input type="submit" value="등록" class="btn_img">
+                        
 						<div class="opt_chk">
 						</div>
 					</div>

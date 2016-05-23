@@ -5,12 +5,12 @@ import java.util.Date;
 /**
  * Created by rokim on 2016. 5. 16..
  */
-public class CnuPost {
-	private int postId;
+public class CnuPostComment {
+	private int commentId;
+    private int postId;
     private String author;
     private String password;
-    private String title;
-    private String content;
+    private String comment;
     private Date createTime;
     private boolean isDel;
 
@@ -38,22 +38,7 @@ public class CnuPost {
         this.password = password;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
+   
     public Date getCreateTime() {
         return createTime;
     }
@@ -61,6 +46,7 @@ public class CnuPost {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
     public boolean isDel() {
         return isDel;
     }
@@ -68,4 +54,20 @@ public class CnuPost {
     public void setIsDel(boolean isDel) {
         this.isDel = isDel;
     }
+
+	public int getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(int commentId) {
+		this.commentId = commentId;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 }
